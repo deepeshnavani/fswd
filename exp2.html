@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Exp 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 200px;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body id="target">
+
+    <div class="container">
+        <h1>Basic JavaScript Operations</h1>
+        <label for="t1">Enter number 1</label>
+        <input type="number" id="t1" required placeholder="Enter number 1" />
+        <br />
+        <label for="t2">Enter number 2</label>
+        <input type="number" id="t2" required placeholder="Enter number 2" />
+        <br />
+        <input type="button" value="Add" onclick="add()" />
+        <input type="button" value="Sub" onclick="sub()" />
+        <input type="button" value="Div" onclick="div()" />
+        <input type="button" value="Mul" onclick="mul()" />
+        <h2 id="res"></h2>
+
+        <h2>Date Operations</h2>
+        <input type="button" value="Get Current Date" onclick="getdate()" />
+        <input type="button" value="Get Current Month" onclick="getmonth()" />
+        <input type="button" value="Get Current Year" onclick="getyear()" />
+        <input type="button" value="Get Full Date" onclick="getFullDate()" />
+        <input type="button" value="Get Day" onclick="getDay()" />
+        <input type="button" value="Get Hours" onclick="getHours()" />
+        <h2 id="dateres"></h2>
+
+        <h2>String Operations</h2>
+        <input type="text" id="t3" required placeholder="Enter your name" />
+        <br />
+        <input type="button" value="Get Length" onclick="getLength()" />
+        <input type="button" value="Get Uppercases" onclick="getUppercase()" />
+        <input type="button" value="Get Lowercases" onclick="getLowercase()" />
+        <input type="button" value="To Uppercase" onclick="toUppercase()" />
+        <input type="button" value="To Lowercase" onclick="toLowercase()" />
+        <br />
+        <input type="button" value="Get Char" onclick="getChar()" />
+        <input type="button" value="Get Char Code" onclick="getCharCode()" />
+        <input type="button" value="Trim" onclick="trimm()" />
+        <input type="button" value="Trim Start" onclick="trimmAtStart()" />
+        <input type="button" value="Trim End" onclick="trimmAtEnd()" />
+        <h2 id="stringres"></h2>
+
+        <h2>Calculate Age</h2>
+        <input type="number" id="t4" required placeholder="Enter your age" />
+        <input type="button" value="Calculate Age" onclick="calculateAge()" />
+        <h2 id="ageres"></h2>
+
+        <input type="button" id="button1" value="Change background color" onclick="changebg()" />
+
+    </div>
+
+</body>
+
+<script>
+    const add = () => {
+        var num1 = Number(document.getElementById("t1").value);
+        var num2 = Number(document.getElementById("t2").value);
+        document.getElementById("res").innerHTML = "Addition: " + (num1 + num2);
+    };
+
+    const sub = () => {
+        var num1 = Number(document.getElementById("t1").value);
+        var num2 = Number(document.getElementById("t2").value);
+        document.getElementById("res").innerHTML = "Subtraction: " + (num1 - num2);
+    };
+
+    const div = () => {
+        var num1 = Number(document.getElementById("t1").value);
+        var num2 = Number(document.getElementById("t2").value);
+        document.getElementById("res").innerHTML = num2 !== 0 ? "Division: " + (num1 / num2) : "Cannot divide by zero";
+    };
+
+    const mul = () => {
+        var num1 = Number(document.getElementById("t1").value);
+        var num2 = Number(document.getElementById("t2").value);
+        document.getElementById("res").innerHTML = "Multiplication: " + (num1 * num2);
+    };
+
+    const getdate = () => {
+        document.getElementById("dateres").innerHTML = "Current date: " + new Date().getDate();
+    };
+
+    const getmonth = () => {
+        document.getElementById("dateres").innerHTML = "Current month: " + (new Date().getMonth() + 1);
+    };
+
+    const getyear = () => {
+        document.getElementById("dateres").innerHTML = "Current year: " + new Date().getFullYear();
+    };
+
+    const getFullDate = () => {
+        const d = new Date();
+        document.getElementById("dateres").innerHTML = `Current date: ${d.getDate()} / ${d.getMonth() + 1} / ${d.getFullYear()}`;
+    };
+
+    const getDay = () => {
+        const d = new Date();
+        document.getElementById("dateres").innerHTML = `Current day: ${d.getDay()}`;
+    };
+
+    const getHours = () => {
+        const d = new Date();
+        document.getElementById("dateres").innerHTML = `Current hour: ${d.getHours()}`;
+    };
+
+    const getLength = () => {
+        document.getElementById('stringres').innerHTML = "Length: " + document.getElementById('t3').value.length;
+    };
+
+    const getUppercase = () => {
+        let value = document.getElementById('t3').value;
+        let uppercase = [...value].filter(ch => ch >= 'A' && ch <= 'Z').length;
+        document.getElementById('stringres').innerHTML = "Uppercases: " + uppercase;
+    };
+
+    const getLowercase = () => {
+        let value = document.getElementById('t3').value;
+        let lowercase = [...value].filter(ch => ch >= 'a' && ch <= 'z').length;
+        document.getElementById('stringres').innerHTML = "Lowercases: " + lowercase;
+    };
+
+    const toUppercase = () => {
+        document.getElementById('stringres').innerHTML = "Uppercased: " + document.getElementById('t3').value.toUpperCase();
+    };
+
+    const toLowercase = () => {
+        document.getElementById('stringres').innerHTML = "Lowercased: " + document.getElementById('t3').value.toLowerCase();
+    };
+
+    const getChar = () => {
+        document.getElementById('stringres').innerHTML = "Char at 0: " + document.getElementById('t3').value.charAt(0);
+    };
+
+    const getCharCode = () => {
+        document.getElementById('stringres').innerHTML = "Char Code at 0: " + document.getElementById('t3').value.charCodeAt(0);
+    };
+
+    const trimm = () => {
+        document.getElementById('stringres').innerHTML = "Trimmed Length: " + document.getElementById('t3').value.trim().length;
+    };
+
+    const trimmAtStart = () => {
+        document.getElementById('stringres').innerHTML = "Trim Start Length: " + document.getElementById('t3').value.trimStart().length;
+    };
+
+    const trimmAtEnd = () => {
+        document.getElementById('stringres').innerHTML = "Trim End Length: " + document.getElementById('t3').value.trimEnd().length;
+    };
+
+    const calculateAge = () => {
+        const age = document.getElementById('t4').value;
+        if (age)
+            document.getElementById('ageres').innerHTML = age < 18 ? "You can't vote you are child" : "You can Vote";
+    }
+
+    const changebg = () => {
+        const button = document.getElementById('button1');
+        const target = document.getElementById('target');
+        const randomColor = `#${Math.floor(Math.random() * 16777125).toString(16)}`;
+
+        button.addEventListener('click', () => {
+            target.style.backgroundColor = randomColor;
+        });
+
+    }
+
+</script>
+
+</html>
