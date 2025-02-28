@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form Validation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: auto;
+        margin-right: 5px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 12px;
+        color: red;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+
+      #nameError {
+        margin-bottom: 5px;
+      }
+
+      #emailError {
+        margin-bottom: 5px;
+      }
+
+      #hobbyError {
+        margin-bottom: 5px;
+      }
+
+      #yearError {
+        margin-bottom: 5px;
+      }
+
+      #phoneError {
+        margin-bottom: 5px;
+      }
+
+      #genderError {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Form Validation</h2>
+      <form onsubmit="return submitDetails(event)">
+        <label for="name">Enter Name:</label>
+        <input type="text" id="name" />
+        <p id="nameError"></p>
+
+        <label for="email">Enter Email:</label>
+        <input type="email" id="email" />
+        <p id="emailError"></p>
+
+        <label for="mob">Enter Mobile Number:</label>
+        <input type="number" id="mob" />
+        <p id="phoneError"></p>
+
+        <label>Choose Gender:</label>
+        <input type="radio" name="gender" value="Male" />Male
+        <input type="radio" name="gender" value="Female" />Female
+        <p id="genderError"></p>
+
+        <label>Choose Hobbies:</label>
+        <input type="checkbox" name="hobby" value="Cricket" />Cricket
+        <input type="checkbox" name="hobby" value="Coding" />Coding
+        <input type="checkbox" name="hobby" value="Football" />Football
+        <p id="hobbyError"></p>
+
+        <label>Select Year:</label>
+        <select id="year">
+          <option value="Select">Select</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <p id="yearError"></p>
+
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      const submitDetails = (event) => {
+        event.preventDefault();
+
+        let isValid = true;
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let mobile = document.getElementById("mob").value;
+        let gender = document.querySelector('input[name="gender"]:checked');
+        let hobbies = document.querySelectorAll('input[name="hobby"]:checked');
+        let year = document.getElementById("year").value;
+
+        let emailRegex = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        let mobileRegex = /^[789]\d{9}$/;
+
+        document.getElementById("nameError").innerHTML =
+          name === "" ? "Please enter name!" : "";
+
+        document.getElementById("emailError").innerHTML =
+          email === ""
+            ? "Please enter email!"
+            : !emailRegex.test(email)
+            ? "Please enter a valid email!"
+            : "";
+
+        document.getElementById("phoneError").innerHTML =
+          mobile === ""
+            ? "Please enter mobile number!"
+            : !mobileRegex.test(mobile)
+            ? "Please enter a valid mobile number!"
+            : "";
+
+        document.getElementById("genderError").innerHTML = !gender
+          ? "Please select gender!"
+          : "";
+
+        document.getElementById("hobbyError").innerHTML =
+          hobbies.length === 0 ? "Please select at least one hobby!" : "";
+
+        document.getElementById("yearError").innerHTML =
+          year === "Select" ? "Please select a year!" : "";
+
+        if (
+          name === "" ||
+          email === "" ||
+          !emailRegex.test(email) ||
+          mobile === "" ||
+          !mobileRegex.test(mobile) ||
+          !gender ||
+          hobbies.length === 0 ||
+          year === "Select"
+        ) {
+          alert("Please fix the errors!");
+        } else {
+          let selectedHobbies = Array.from(hobbies).map((hobby) => hobby.value);
+
+          alert(
+            `Name: ${name}\nEmail: ${email}\nPhone: ${mobile}\nGender: ${
+              gender.value
+            }\nHobbies: ${selectedHobbies.join(", ")}\nYear: ${year}`
+          );
+        }
+      };
+    </script>
+  </body>
+</html>
