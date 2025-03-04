@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slideshow</title>
+    <style>
+      #container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+      }
+      img {
+        width: 380px;
+        height: 250px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div>
+        <img id="slideshow" src="virat.png" />
+        <h3 style="text-align: center" id="player">Virat Kohli</h3>
+      </div>
+    </div>
+    <div class="buttons">
+      <button onclick="prevSlide()">Previous</button>
+      <button onclick="nextSlide()">Next</button>
+    </div>
+  </body>
+
+  <script>
+    const images = ["virat.png", "rohit.png", "hardik.png"];
+    const players = ["Virat Kohli", "Rohit Sharma", "Hardik Pandya"];
+    let index = 0;
+
+    function showImage() {
+      document.getElementById("slideshow").src = images[index];
+      document.getElementById("player").innerHTML = players[index];
+    }
+
+    function nextSlide() {
+      index = (index + 1) % images.length;
+      showImage();
+    }
+
+    function prevSlide() {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    }
+  </script>
+</html>
